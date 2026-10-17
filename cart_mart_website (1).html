@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Mart | Wesal Residence Supermarket</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#FF6B00',
+                            orangeHover: '#E05D00',
+                            orangeLight: '#FFF0E6',
+                            blue: '#0F172A',
+                            navy: '#1E293B',
+                            accentBlue: '#2563EB',
+                            sky: '#E0F2FE'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #FF6B00;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen custom-scrollbar">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-blue text-slate-200 text-xs sm:text-sm py-2 px-4 text-center border-b border-slate-800 flex justify-between items-center max-w-full overflow-hidden">
+        <div class="container mx-auto flex justify-between items-center">
+            <span class="flex items-center gap-2">
+                <span class="inline-block w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                <span class="font-medium">Open Daily: 8:00 AM – 2:00 AM</span>
+            </span>
+            <span class="hidden md:inline text-slate-400">
+                <i class="fa-solid fa-location-dot text-brand-orange mr-1"></i> Wesal Residence, Near Mosque, El Shorouk
+            </span>
+            <a href="tel:01505904141" class="font-bold text-brand-orange hover:underline flex items-center gap-1">
+                <i class="fa-solid fa-phone"></i> 015 05904141
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-brand-orange flex items-center justify-center text-white text-xl font-black shadow-lg shadow-brand-orange/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-brand-blue">CART<span class="text-brand-orange">MART</span></span>
+                    <span class="block text-[10px] font-semibold text-slate-400 uppercase tracking-widest -mt-1">Wesal Residence</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+                <a href="#about" class="hover:text-brand-orange transition-colors">Why Us</a>
+                <a href="#products" class="hover:text-brand-orange transition-colors">Products</a>
+                <a href="#offers" class="hover:text-brand-orange transition-colors">Special Offers</a>
+                <a href="#reviews" class="hover:text-brand-orange transition-colors">Reviews</a>
+                <a href="#contact" class="hover:text-brand-orange transition-colors">Find Us</a>
+            </nav>
+
+            <!-- Basket Trigger Button -->
+            <button onclick="toggleBasketModal()" class="relative bg-brand-orange hover:bg-brand-orangeHover text-white px-4 py-2.5 rounded-full font-semibold shadow-md shadow-brand-orange/20 flex items-center gap-2 transition-all active:scale-95">
+                <i class="fa-solid fa-basket-shopping text-lg"></i>
+                <span class="hidden sm:inline">Quick Order</span>
+                <span id="basket-badge" class="bg-white text-brand-orange text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-brand-blue via-brand-navy to-slate-900 text-white overflow-hidden py-16 lg:py-24">
+            <!-- Decorative Background Elements -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-orange/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full bg-brand-accentBlue/10 blur-3xl pointer-events-none"></div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <!-- Left Copy -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-brand-orange text-xs font-semibold backdrop-blur-sm border border-white/10">
+                            <i class="fa-solid fa-store"></i> Your Neighborhood Supermarket
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+                            Cart Mart – <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">Fresh Quality</span> & Daily Essentials Right in Wesal
+                        </h1>
+                        <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal">
+                            Discover premium cheeses, fresh dairy, snacks, cold beverages, and household pantry items right around the corner. Fast delivery directly to your door in Wesal Residence!
+                        </p>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="tel:01505904141" class="w-full sm:w-auto px-8 py-4 bg-brand-orange hover:bg-brand-orangeHover text-white font-bold rounded-2xl shadow-lg shadow-brand-orange/30 flex items-center justify-center gap-3 transition-all transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-phone text-lg"></i> Call to Order: 015 05904141
+                            </a>
+                            <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-2xl backdrop-blur-sm border border-white/15 flex items-center justify-center gap-2 transition-all">
+                                <i class="fa-solid fa-location-arrow"></i> Get Directions
+                            </a>
+                        </div>
+
+                        <!-- Trust Badges -->
+                        <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <div class="text-brand-orange font-bold text-xl sm:text-2xl">4.0 ★</div>
+                                <div class="text-xs text-slate-400">85+ Google Reviews</div>
+                            </div>
+                            <div>
+                                <div class="text-white font-bold text-xl sm:text-2xl">2:00 AM</div>
+                                <div class="text-xs text-slate-400">Late Night Hours</div>
+                            </div>
+                            <div>
+                                <div class="text-white font-bold text-xl sm:text-2xl">Wesal</div>
+                                <div class="text-xs text-slate-400">Local Express Delivery</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Visual / Quick Promo Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-gradient-to-b from-white/10 to-white/5 border border-white/10 p-6 sm:p-8 rounded-3xl shadow-2xl backdrop-blur-md relative">
+                            <div class="absolute -top-4 -right-4 bg-brand-orange text-white font-bold px-4 py-1 rounded-full text-xs shadow-lg uppercase tracking-wider">
+                                Neighborhood Favorite
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-white flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-brand-orange"></i> Instant Quick Order
+                            </h3>
+                            <p class="text-slate-300 text-sm mb-6">
+                                Need items right now? Type your list below or tap products to send a quick WhatsApp or phone request!
+                            </p>
+                            
+                            <!-- Quick Note Input -->
+                            <div class="space-y-4">
+                                <textarea id="hero-quick-list" placeholder="e.g. 1L Milk, 250g Cheddar Cheese, Pack of Water, Chips..." class="w-full h-28 px-4 py-3 bg-slate-900/80 text-white rounded-xl border border-slate-700 focus:outline-none focus:border-brand-orange text-sm placeholder-slate-500 resize-none"></textarea>
+                                <button onclick="sendQuickOrderFromHero()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Send Order via WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlights & Why Choose Us -->
+        <section id="about" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-brand-orange font-bold uppercase tracking-wider text-xs">Why Shop At Cart Mart</span>
+                    <h2 class="text-3xl font-extrabold text-brand-blue mt-1">Your Trusted Daily Convenience Store</h2>
+                    <p class="text-slate-600 mt-2 text-sm sm:text-base">We prioritize fresh items, honest pricing, and friendly neighborly service every single day.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Feature 1 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 hover:bg-brand-orangeLight/30 border border-slate-100 hover:border-brand-orange/30 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-brand-orange group-hover:text-white transition-all">
+                            <i class="fa-solid fa-cheese"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-brand-blue mb-2">Fresh Dairy & Cheeses</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Handpicked selection of local & imported cheeses, fresh cold milk, yogurt, and daily dairy essentials.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 hover:bg-brand-orangeLight/30 border border-slate-100 hover:border-brand-orange/30 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-brand-orange group-hover:text-white transition-all">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-brand-blue mb-2">Great Value & Fair Prices</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Competitive pricing on all daily essentials without compromising on freshness or product quality.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 hover:bg-brand-orangeLight/30 border border-slate-100 hover:border-brand-orange/30 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-brand-orange group-hover:text-white transition-all">
+                            <i class="fa-solid fa-motorcycle"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-brand-blue mb-2">Fast Wesal Delivery</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Quick neighborhood delivery service straight to your building anywhere in Wesal Residence.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 hover:bg-brand-orangeLight/30 border border-slate-100 hover:border-brand-orange/30 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center text-xl font-bold mb-4 group-hover:bg-brand-orange group-hover:text-white transition-all">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-brand-blue mb-2">Open Until 2:00 AM</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Late-night cravings or urgent household needs? We are open daily from morning until 2 AM!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Categories & Interactive Catalog -->
+        <section id="products" class="py-16 bg-slate-100/70">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <span class="text-brand-orange font-bold uppercase tracking-wider text-xs">Featured Inventory</span>
+                        <h2 class="text-3xl font-extrabold text-brand-blue">Browse Store Products</h2>
+                    </div>
+                    <!-- Category Tabs -->
+                    <div class="flex flex-wrap gap-2" id="category-tabs">
+                        <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-xl font-medium text-sm transition-all bg-brand-orange text-white shadow-sm" data-cat="all">All Items</button>
+                        <button onclick="filterCategory('dairy')" class="cat-btn px-4 py-2 rounded-xl font-medium text-sm transition-all bg-white text-slate-700 hover:bg-slate-200" data-cat="dairy">Dairy & Cheese</button>
+                        <button onclick="filterCategory('snacks')" class="cat-btn px-4 py-2 rounded-xl font-medium text-sm transition-all bg-white text-slate-700 hover:bg-slate-200" data-cat="snacks">Snacks & Drinks</button>
+                        <button onclick="filterCategory('pantry')" class="cat-btn px-4 py-2 rounded-xl font-medium text-sm transition-all bg-white text-slate-700 hover:bg-slate-200" data-cat="pantry">Groceries & Pantry</button>
+                        <button onclick="filterCategory('household')" class="cat-btn px-4 py-2 rounded-xl font-medium text-sm transition-all bg-white text-slate-700 hover:bg-slate-200" data-cat="household">Daily Essentials</button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" id="product-grid">
+                    <!-- Javascript populates this -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offers Banner Carousel / Banners -->
+        <section id="offers" class="py-16 bg-white overflow-hidden">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-brand-orange font-bold uppercase tracking-wider text-xs">Weekly Savings</span>
+                    <h2 class="text-3xl font-extrabold text-brand-blue">Cart Mart Special Offers</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Offer Banner 1 -->
+                    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-brand-blue to-slate-800 text-white p-8 shadow-lg flex flex-col justify-between min-h-[220px]">
+                        <div class="absolute right-0 bottom-0 opacity-10 text-9xl font-black select-none pointer-events-none -mr-8 -mb-8">
+                            <i class="fa-solid fa-cheese"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <span class="bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Fresh Dairy Deal</span>
+                            <h3 class="text-2xl font-bold mt-3">Breakfast Dairy Bundle</h3>
+                            <p class="text-slate-300 text-sm mt-1">Get special discounts on Gouda, White Cheese & Fresh Milk when ordering together.</p>
+                        </div>
+                        <div class="relative z-10 mt-6 flex items-center justify-between">
+                            <span class="text-amber-400 font-extrabold text-lg">Save up to 15%</span>
+                            <button onclick="addBundleToBasket('Breakfast Dairy Bundle', 'Fresh Cheese & Milk Mix')" class="bg-white text-brand-blue hover:bg-brand-orange hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-colors shadow">
+                                Add Offer
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Offer Banner 2 -->
+                    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-brand-orange to-amber-600 text-white p-8 shadow-lg flex flex-col justify-between min-h-[220px]">
+                        <div class="absolute right-0 bottom-0 opacity-15 text-9xl font-black select-none pointer-events-none -mr-8 -mb-8">
+                            <i class="fa-solid fa-cookie-bite"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <span class="bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Late Night Snack Mix</span>
+                            <h3 class="text-2xl font-bold mt-3">Late Night Munchies Special</h3>
+                            <p class="text-slate-100 text-sm mt-1">Chips, Soda, Biscuits & Chocolates delivered right to your apartment up to 2:00 AM.</p>
+                        </div>
+                        <div class="relative z-10 mt-6 flex items-center justify-between">
+                            <span class="text-white font-extrabold text-lg">Express Night Delivery</span>
+                            <button onclick="addBundleToBasket('Late Night Munchies Pack', 'Chips + Soft Drinks + Chocolate')" class="bg-brand-blue hover:bg-slate-900 text-white px-4 py-2 rounded-xl font-bold text-sm transition-colors shadow">
+                                Add Offer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Reviews & Feedback -->
+        <section id="reviews" class="py-16 bg-slate-50 border-t border-slate-200">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <!-- Rating Summary Box -->
+                    <div class="lg:col-span-4 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-center">
+                        <div class="text-5xl font-black text-brand-blue mb-2">4.0</div>
+                        <div class="flex justify-center text-amber-400 gap-1 text-xl mb-2">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium text-sm">Based on 85 Google Reviews</p>
+                        <div class="mt-6 pt-6 border-t border-slate-100 space-y-2 text-left text-xs text-slate-600">
+                            <div class="flex items-center justify-between">
+                                <span>Product Variety</span>
+                                <span class="font-bold text-brand-blue">High Quality</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Location</span>
+                                <span class="font-bold text-brand-blue">Wesal Residence</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Closing Hour</span>
+                                <span class="font-bold text-brand-orange">2:00 AM Daily</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Cards Grid -->
+                    <div class="lg:col-span-8 grid sm:grid-cols-2 gap-4">
+                        <!-- Review 1 -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <div class="font-bold text-slate-800">Shahd Maher</div>
+                                    <span class="text-xs bg-amber-50 text-amber-700 font-semibold px-2 py-0.5 rounded-md">Local Guide</span>
+                                </div>
+                                <div class="text-amber-400 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 text-sm italic">"Nice market and good prices and quality, good luck! Very convenient for residents in Wesal."</p>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-4">Verified Google Review</div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <div class="font-bold text-slate-800">Omar H.</div>
+                                    <span class="text-xs bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded-md">Resident</span>
+                                </div>
+                                <div class="text-amber-400 text-xs mb-2">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                                </div>
+                                <p class="text-slate-600 text-sm italic">"Great store for essential cheeses, snacks and groceries. Note for visitors: They close at 2:00 AM!"</p>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-4">Verified Google Review</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location, Hours & Contact Section -->
+        <section id="contact" class="py-16 bg-brand-blue text-white relative">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-12 gap-12">
+                    <!-- Left Info -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <span class="text-brand-orange font-bold uppercase tracking-wider text-xs">Visit & Contact Us</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Conveniently Located in Wesal</h2>
+                            <p class="text-slate-300 text-sm mt-2">Stop by our friendly market or order delivery right to your door.</p>
+                        </div>
+
+                        <div class="space-y-4 text-sm">
+                            <!-- Address -->
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="w-10 h-10 rounded-xl bg-brand-orange/20 text-brand-orange flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white">Store Address</div>
+                                    <div class="text-slate-300 mt-0.5">Wesal Residence, Near Wesal Residence Mosque, El Shorouk, Cairo Governorate</div>
+                                    <div class="text-xs text-brand-orange font-mono mt-1">Plus Code: 4H8Q+9G El Shorouk</div>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white">Phone & Delivery</div>
+                                    <a href="tel:01505904141" class="text-emerald-400 font-bold hover:underline text-base block mt-0.5">015 05904141</a>
+                                    <div class="text-xs text-slate-400">Call directly for instant home delivery</div>
+                                </div>
+                            </div>
+
+                            <!-- Opening Hours -->
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white">Opening Hours</div>
+                                    <div class="text-amber-300 font-semibold mt-0.5">Open Daily: 8:00 AM – 2:00 AM</div>
+                                    <div class="text-xs text-slate-400">Open 7 days a week</div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Methods -->
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="font-bold text-white mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-wallet text-brand-orange"></i> Payment Methods Accepted
+                                </div>
+                                <div class="flex flex-wrap gap-2 text-xs">
+                                    <span class="bg-white/10 px-3 py-1 rounded-full text-slate-200">Cash on Delivery</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full text-slate-200">InstaPay Transfer</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full text-slate-200">Vodafone Cash</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Map Embed & Action Card -->
+                    <div class="lg:col-span-7 flex flex-col h-full min-h-[380px] rounded-3xl overflow-hidden border border-white/10 bg-slate-900">
+                        <iframe 
+                            class="w-full h-full min-h-[300px] border-0"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3451.2!2d31.6!3d30.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDA2JzAwLjAiTiAzM8KwMzYnMDAuMCJF!5e0!3m2!1sen!2seg!4v1600000000000!5m2!1sen!2seg" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <div class="p-4 bg-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <span class="text-xs text-slate-400">Located right near Wesal Residence Mosque</span>
+                            <a href="https://maps.google.com/?q=Wesal+Residence+Cairo" target="_blank" rel="noopener" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all w-full sm:w-auto justify-center">
+                                <i class="fa-solid fa-directions"></i> Open Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 text-sm py-8 border-t border-slate-800">
+        <div class="container mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center">
+            <div class="mb-4 sm:mb-0">
+                <span class="text-white font-bold text-base">Cart Mart Supermarket</span>
+                <p class="text-xs text-slate-500 mt-0.5">Wesal Residence, El Shorouk, Cairo Governorate</p>
+            </div>
+            <div class="text-xs text-slate-500">
+                &copy; <script>document.write(new Date().getFullYear())</script> Cart Mart. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Basket Modal / Quick Order Drawer -->
+    <div id="basket-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden transition-opacity">
+        <div class="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col justify-between p-6 overflow-y-auto custom-scrollbar">
+            <div>
+                <!-- Header -->
+                <div class="flex items-center justify-between border-b pb-4 border-slate-100">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping text-brand-orange text-xl"></i>
+                        <h3 class="font-extrabold text-slate-800 text-lg">Your Order Basket</h3>
+                    </div>
+                    <button onclick="toggleBasketModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center font-bold">✕</button>
+                </div>
+
+                <!-- Selected Items List -->
+                <div id="basket-items-container" class="py-4 space-y-3">
+                    <p class="text-slate-400 text-sm text-center py-8">Your basket is empty.<br>Tap items on the menu to quickly add them!</p>
+                </div>
+
+                <!-- Custom Grocery List Textarea -->
+                <div class="mt-4 pt-4 border-t border-slate-100">
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                        Add Custom Items or Notes
+                    </label>
+                    <textarea id="custom-basket-notes" placeholder="e.g. Please bring 1 loaf of bread and extra cold drinks..." class="w-full h-20 px-3 py-2 text-sm border border-slate-200 rounded-xl focus:border-brand-orange focus:outline-none resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="pt-4 border-t border-slate-100 space-y-3">
+                <div class="flex justify-between font-bold text-slate-800">
+                    <span>Estimated Total Items:</span>
+                    <span id="basket-total-count">0 items</span>
+                </div>
+                <button onclick="sendWhatsAppBasketOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Complete Order via WhatsApp
+                </button>
+                <a href="tel:01505904141" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl shadow flex items-center justify-center gap-2 transition-all block text-center">
+                    <i class="fa-solid fa-phone"></i> Call Store Directly
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-2xl text-sm font-semibold flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-50">
+        <i class="fa-solid fa-circle-check text-brand-orange"></i>
+        <span id="toast-message">Item added to basket!</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Sample Products Catalog Data
+        const productsData = [
+            { id: 1, name: "Fresh White Cheese", cat: "dairy", price: "EG 45.00", img: "🧀" },
+            { id: 2, name: "Gouda Cheese Slice", cat: "dairy", price: "EG 65.00", img: "🧀" },
+            { id: 3, name: "Full Cream Milk 1L", cat: "dairy", price: "EG 38.00", img: "🥛" },
+            { id: 4, name: "Fresh Greek Yogurt", cat: "dairy", price: "EG 22.00", img: "🥣" },
+            { id: 5, name: "Crispy Potato Chips", cat: "snacks", price: "EG 15.00", img: "🥔" },
+            { id: 6, name: "Cold Cola Bottle 1.5L", cat: "snacks", price: "EG 28.00", img: "🥤" },
+            { id: 7, name: "Chocolate Hazelnut Bar", cat: "snacks", price: "EG 20.00", img: "🍫" },
+            { id: 8, name: "Natural Mineral Water 1.5L", cat: "snacks", price: "EG 10.00", img: "💧" },
+            { id: 9, name: "Egyptian Rice 1kg", cat: "pantry", price: "EG 35.00", img: "🌾" },
+            { id: 10, name: "Pure Sunflower Oil 800ml", cat: "pantry", price: "EG 68.00", img: "🍾" },
+            { id: 11, name: "Pasta Penne 400g", cat: "pantry", price: "EG 16.00", img: "🍝" },
+            { id: 12, name: "Kitchen Paper Towels (2 Rolls)", cat: "household", price: "EG 32.00", img: "🧻" },
+            { id: 13, name: "Dishwashing Liquid 1L", cat: "household", price: "EG 42.00", img: "🧴" },
+            { id: 14, name: "Pack of Tea Bags (50s)", cat: "pantry", price: "EG 48.00", img: "☕" }
+        ];
+
+        let basket = [];
+
+        // Render Products
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = items.map(p => `
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-full h-28 rounded-xl bg-slate-50 flex items-center justify-center text-5xl mb-3 group-hover:scale-105 transition-transform">
+                            ${p.img}
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm sm:text-base leading-snug">${p.name}</h4>
+                        <div class="text-xs text-slate-400 capitalize mt-1">${p.cat}</div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between pt-2 border-t border-slate-100">
+                        <span class="font-extrabold text-brand-blue text-sm">${p.price}</span>
+                        <button onclick="addToBasket(${p.id})" class="bg-brand-orangeLight hover:bg-brand-orange text-brand-orange hover:text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors shadow-sm font-bold">
+                            +
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Category Filter
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.classList.add('bg-brand-orange', 'text-white', 'shadow-sm');
+                    btn.classList.remove('bg-white', 'text-slate-700');
+                } else {
+                    btn.classList.remove('bg-brand-orange', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-white', 'text-slate-700');
+                }
+            });
+
+            if (cat === 'all') {
+                renderProducts(productsData);
+            } else {
+                renderProducts(productsData.filter(p => p.cat === cat));
+            }
+        }
+
+        // Basket Logic
+        function addToBasket(id) {
+            const product = productsData.find(p => p.id === id);
+            const existing = basket.find(item => item.id === id);
+
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                basket.push({ ...product, qty: 1 });
+            }
+
+            updateBasketUI();
+            showToast(`Added ${product.name} to basket!`);
+        }
+
+        function addBundleToBasket(title, details) {
+            basket.push({
+                id: Date.now(),
+                name: `${title} (${details})`,
+                price: "Special Offer",
+                qty: 1,
+                img: "🎁"
+            });
+            updateBasketUI();
+            toggleBasketModal();
+            showToast(`Added ${title} offer to basket!`);
+        }
+
+        function changeQty(id, delta) {
+            const index = basket.findIndex(item => item.id === id);
+            if (index !== -1) {
+                basket[index].qty += delta;
+                if (basket[index].qty <= 0) {
+                    basket.splice(index, 1);
+                }
+            }
+            updateBasketUI();
+        }
+
+        function updateBasketUI() {
+            const totalCount = basket.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('basket-badge').innerText = totalCount;
+            document.getElementById('basket-total-count').innerText = `${totalCount} items`;
+
+            const container = document.getElementById('basket-items-container');
+            if (basket.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 text-sm text-center py-8">Your basket is empty.<br>Tap items on the menu to quickly add them!</p>`;
+                return;
+            }
+
+            container.innerHTML = basket.map(item => `
+                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">${item.img || '🛒'}</span>
+                        <div>
+                            <div class="font-bold text-slate-800 text-xs sm:text-sm">${item.name}</div>
+                            <div class="text-xs text-slate-500">${item.price}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-lg border border-slate-200">
+                        <button onclick="changeQty(${item.id}, -1)" class="text-slate-500 font-bold px-1.5 hover:text-brand-orange">-</button>
+                        <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                        <button onclick="changeQty(${item.id}, 1)" class="text-slate-500 font-bold px-1.5 hover:text-brand-orange">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleBasketModal() {
+            const modal = document.getElementById('basket-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // WhatsApp Order Sender
+        function sendWhatsAppBasketOrder() {
+            const customNotes = document.getElementById('custom-basket-notes').value.trim();
+            if (basket.length === 0 && !customNotes) {
+                alert("Please add items to your basket or enter a custom list before ordering!");
+                return;
+            }
+
+            let message = "Hello Cart Mart! I would like to order delivery to Wesal Residence:\n\n";
+            
+            if (basket.length > 0) {
+                message += "*Items Ordered:*\n";
+                basket.forEach(item => {
+                    message += `• ${item.name} x${item.qty}\n`;
+                });
+            }
+
+            if (customNotes) {
+                message += `\n*Additional Notes / Custom Items:*\n${customNotes}\n`;
+            }
+
+            message += "\nPlease confirm availability and delivery time. Thank you!";
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/201505904141?text=${encodedMessage}`, '_blank');
+        }
+
+        function sendQuickOrderFromHero() {
+            const text = document.getElementById('hero-quick-list').value.trim();
+            if (!text) {
+                alert("Please type your items first!");
+                return;
+            }
+            const message = encodeURIComponent(`Hello Cart Mart! I would like to order the following for delivery to Wesal Residence:\n\n${text}`);
+            window.open(`https://wa.me/201505904141?text=${message}`, '_blank');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        }
+
+        // Initial Page Load
+        window.onload = function() {
+            renderProducts(productsData);
+        };
+    </script>
+</body>
+</html>
